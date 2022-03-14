@@ -15,6 +15,10 @@
  */
 package com.baomidou.samples.seata.service;
 
+import com.baomidou.samples.seata.entity.Order;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 public interface ProductService {
 
     /**
@@ -25,4 +29,6 @@ public interface ProductService {
      * @return 商品总价
      */
     Double reduceStock(Long productId, Integer amount);
+
+     void insert(Order order);
 }

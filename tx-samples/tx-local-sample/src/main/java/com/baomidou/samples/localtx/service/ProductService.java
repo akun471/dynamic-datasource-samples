@@ -17,12 +17,19 @@ package com.baomidou.samples.localtx.service;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.dynamic.datasource.tx.TransactionContext;
+import com.baomidou.samples.localtx.entity.Order;
 import com.baomidou.samples.localtx.entity.Product;
+import com.baomidou.samples.localtx.mapper.OrderMapper;
 import com.baomidou.samples.localtx.mapper.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.catalina.servlets.DefaultServlet;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
+
+import javax.annotation.Resource;
 
 @Slf4j
 @Service
@@ -31,7 +38,14 @@ public class ProductService {
 
     private final ProductMapper productMapper;
 
+    private final OrderMapper orderMapper;
+    @Transactional
+    public void insert(Order order) {
+        orderMapper.insert(order);
+    }
+
     @DS("product")
+    @Transactional
     public Double reduceStock(Long productId, Integer amount) {
         log.info("=============PRODUCT START=================");
         log.info("当前 XID: {}", TransactionContext.getXID());

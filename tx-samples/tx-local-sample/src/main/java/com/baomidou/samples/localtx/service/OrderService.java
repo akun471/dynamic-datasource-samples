@@ -24,6 +24,7 @@ import com.baomidou.samples.localtx.mapper.OrderMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
@@ -51,7 +52,7 @@ public class OrderService {
                 .amount(amount)
                 .build();
 
-        orderMapper.insert(order);
+        productService.insert(order);
         log.info("订单一阶段生成，等待扣库存付款中");
         // 扣减库存并计算总价
         Double totalPrice = productService.reduceStock(productId, amount);

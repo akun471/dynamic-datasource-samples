@@ -28,6 +28,7 @@ import io.seata.spring.annotation.GlobalTransactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -63,7 +64,8 @@ public class OrderServiceImpl implements OrderService {
                 .amount(amount)
                 .build();
 
-        orderMapper.insert(order);
+        productService.insert(order);
+
         log.info("订单一阶段生成，等待扣库存付款中");
         // 扣减库存并计算总价
         Double totalPrice = productService.reduceStock(productId, amount);
@@ -75,5 +77,10 @@ public class OrderServiceImpl implements OrderService {
         orderMapper.updateById(order);
         log.info("订单已成功下单");
         log.info("=============ORDER END=================");
+    }
+
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void insert(Order order) {
+        orderMapper.insert(order);
     }
 }

@@ -10,30 +10,30 @@ spring:
       datasource:
         order:
           username: root
-          password: 123456
-          url: jdbc:mysql://110.40.253.205:3306/seata_order?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          password: henjiandan
+          url: jdbc:mysql://localhost:3306/seata_order?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.jdbc.Driver
           init:
             schema: classpath:db/schema-order.sql
         account:
           username: root
-          password: 123456
-          url: jdbc:mysql://110.40.253.205:3306/seata_account?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          password: henjiandan
+          url: jdbc:mysql://localhost:3306/seata_account?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.jdbc.Driver
           init:
             schema: classpath:db/schema-account.sql
         product:
           username: root
-          password: 123456
-          url: jdbc:mysql://110.40.253.205:3306/seata_product?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
+          password: henjiandan
+          url: jdbc:mysql://localhost:3306/seata_product?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&useSSL=false
           driver-class-name: com.mysql.jdbc.Driver
           init:
             schema: classpath:db/schema-product.sql
         test:
-          username: sa
-          password: ""
-          url: jdbc:h2:mem:test
-          driver-class-name: org.h2.Driver
+          username: root
+          password: henjiandan
+          url: jdbc:mysql://localhost:3306/user_2?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+          driver-class-name: com.mysql.jdbc.Driver
           seata: false #这个数据源不需要seata
 seata:
   enabled: true
@@ -47,7 +47,7 @@ seata:
       my_test_tx_group: default
     grouplist:
       #seata-server地址仅file注册中心需要
-      default: 110.40.253.205:8091
+      default: localhost:8091
   config:
     type: file
   registry:

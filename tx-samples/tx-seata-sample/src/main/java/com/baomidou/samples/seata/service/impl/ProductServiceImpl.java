@@ -16,7 +16,9 @@
 package com.baomidou.samples.seata.service.impl;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
+import com.baomidou.samples.seata.entity.Order;
 import com.baomidou.samples.seata.entity.Product;
+import com.baomidou.samples.seata.mapper.OrderMapper;
 import com.baomidou.samples.seata.mapper.ProductMapper;
 import com.baomidou.samples.seata.service.ProductService;
 import io.seata.core.context.RootContext;
@@ -35,6 +37,8 @@ public class ProductServiceImpl implements ProductService {
     @Resource
     private ProductMapper productMapper;
 
+    @Resource
+    private OrderMapper orderMapper;
     /**
      * 事务传播特性设置为 REQUIRES_NEW 开启新的事务
      */
@@ -64,5 +68,12 @@ public class ProductServiceImpl implements ProductService {
         log.info("扣减商品编号为 {} 库存成功,扣减后库存为{}, {} 件商品总价为 {} ", productId, currentStock, amount, totalPrice);
         log.info("=============PRODUCT END=================");
         return totalPrice;
+    }
+
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    public void insert(Order order) {
+        orderMapper.insert(order);
     }
 }

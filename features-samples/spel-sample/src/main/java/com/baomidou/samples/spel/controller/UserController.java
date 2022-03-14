@@ -39,9 +39,8 @@ public class UserController {
     }
 
     @GetMapping("/header")
-    public String header() {
-        userService.selectSpelByHeader();
-        return "success";
+    public List<User> header() {
+        return userService.selectSpelByHeader();
     }
 
     @GetMapping("/spel1")

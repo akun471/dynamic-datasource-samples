@@ -10,7 +10,7 @@ spring:
           username: sa
           password: ""
           url: jdbc:h2:mem:test
-          driver-class-name: org.h2.Driver
+          driver-class-name: com.mysql.jdbc.Driver
         quartz: #把quartz数据源也作为动态数据源的一个数据源
           username: root
           password: 123456

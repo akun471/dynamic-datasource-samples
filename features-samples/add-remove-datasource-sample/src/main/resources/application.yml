@@ -6,17 +6,17 @@ spring:
           username: sa
           password: ""
           url: jdbc:h2:mem:test
-          driver-class-name: org.h2.Driver
+          driver-class-name: com.mysql.jdbc.Driver
         slave_1:
           username: sa
           password: ""
           url: jdbc:h2:mem:test1
-          driver-class-name: org.h2.Driver
+          driver-class-name: com.mysql.jdbc.Driver
         slave_2:
           username: sa
           password: ""
           url: jdbc:h2:mem:test2
-          driver-class-name: org.h2.Driver
+          driver-class-name: com.mysql.jdbc.Driver
       druid:
         validation-query: "select 1"
 
